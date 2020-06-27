@@ -13,7 +13,7 @@
   "dependencies": {
     "ejs": "^2.5.6",
     "express": "^4.15.2",
-    "pg": "^12.3"
+    "pg": "12.3"
   },
   "devDependencies": {
     "got": "^11.3.0",
