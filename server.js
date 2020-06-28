@@ -32,7 +32,7 @@ app.post('/postage', (req, res) => {
 
     res.render('pages/postage', obj)
   })
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+  app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
 // This says that we want the function "getPerson" below to handle
 // any requests that come to the /getPerson endpoint
