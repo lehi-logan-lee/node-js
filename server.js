@@ -20,19 +20,21 @@ const pool = new Pool({connectionString: connectionString});
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 //I added it
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
-app.set('views', path.join(__dirname, 'views'))
-app.set('view engine', 'ejs')
-app.get('/', (req, res) => res.render('pages/index'))
-app.post('/postage', (req, res) => {
+express()
+  .use(express.static(path.join(__dirname, 'public')))
+  .use(bodyParser.json())
+  .use(bodyParser.urlencoded({ extended: true }))
+  .set('views', path.join(__dirname, 'views'))
+  .set('view engine', 'ejs')
+  .get('/', (req, res) => res.render('pages/index'))
+  .post('/postage', (req, res) => {
     const weight = +req.body.weight
     const type = req.body.type
     const obj = { weight: weight, type: type, result: calculateRate(weight, type) }
 
     res.render('pages/postage', obj)
   })
-  app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
 // This says that we want the function "getPerson" below to handle
 // any requests that come to the /getPerson endpoint
