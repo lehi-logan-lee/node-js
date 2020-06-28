@@ -7,6 +7,18 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+         $("button").click(function(){
+            $.getJSON("server.js", function(result){
+              $.each(result, function(i, field){
+                $("div").append(field + " ");
+              });
+            });
+          });
+        });
+    </script>
     <title>Document</title>
 </head>
 <body>
@@ -15,19 +27,19 @@
         <div class='row'>
             <div class='col col-xs-4'>
                 <h2>Money Managers</h2>
-                <form action="/postage" method="post">
+                <form action="/getPerson" method="post">
 
                     <div class="form-group">
-                        <label for="type">Money Manager Name:</label>
+                        <label for="type">Choose a Money Manager:</label>
                         <select class="form-control col-xs-4" id="type" name='type'>
-                        <option>Thomas Edison</option>
-                        <option>Scott Burton</option>
-                        <option>Li Hai</option>
+                        <option id = 1>Thomas Edison</option>
+                        <option id = '2'>Scott Burton</option>
+                        <option id = "3">Li Hai</option>
                         <option>Bill Gates</option>
                         </select>
                     </div> 
                     
-                    <button type="submit" class="btn btn-success btn-lg">See Wealth</button>
+                    <button type="submit" class="btn btn-success btn-lg">See Balance</button>
                 </form>
             </div>
         </div>
