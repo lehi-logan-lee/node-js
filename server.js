@@ -20,7 +20,7 @@ const pool = new Pool({connectionString: connectionString});
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 //I added it
-express()
+/*express()
   .use(express.static(path.join(__dirname, 'public')))
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({ extended: true }))
@@ -34,7 +34,7 @@ express()
 
     res.render('pages/postage', obj)
   })
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`))*/
 
 // This says that we want the function "getPerson" below to handle
 // any requests that come to the /getPerson endpoint
