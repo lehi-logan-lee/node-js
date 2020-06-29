@@ -64,7 +64,7 @@ function getPerson(request, response) {
 			response.status(500).json({success: false, data: error});
 		} else {
 			const person = result[0];
-			response.status(200).json(person);
+			response.status(200).person;
 		}
 	});
 }
