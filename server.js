@@ -70,12 +70,9 @@ function getPerson(request, response) {
             //const fir = pool.query(first, id);
             //var p = Promise.resolve(fir);
               //app.get('/getPerson', (request, response) => {
-              //const weight = +req.body.weight
-              //const id = request.body.id
             const obj = { first: firstName, last: lastName, money: money, id: id }
 
             response.render('pages/getPerson', obj)
-              //})
 			//response.status(200).json(person);
 		}
 	});
@@ -118,25 +115,3 @@ function getPersonFromDb(id, callback) {
 	});
 
 } // end of getPersonFromDb
-
-//function for week 9
-function calculateRate(weight, type) {
-    let baseValue = 0;
-    const rate = 0.15;
-      switch(type) {
-        case 'Letters (Stamped)':
-          baseValue = 0.55;
-          break
-        case 'Letters (Metered)':
-            baseValue = 0.50;
-          break
-        case 'Large Envelopes (Flats)':
-            baseValue = 1.00;
-          break
-        case 'First-Class Package Service—Retail':
-            baseValue = 0.35;
-          break
-      }
-
-      return (baseValue + (Math.ceil(weight) - 1) * 0.15).toFixed(2);
-  }
