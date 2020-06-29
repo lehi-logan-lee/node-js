@@ -58,7 +58,8 @@ function getPerson(request, response) {
 			response.status(500).json({success: false, data: error});
 		} else {
             const person = result[0];
-            var txt = JSON.parse(person);
+            var jsonPerson = response.status(200).json(person);
+            var txt = JSON.parse(jsonPerson);
             var first = txt.first;
               //app.get('/getPerson', (request, response) => {
               //const weight = +req.body.weight
