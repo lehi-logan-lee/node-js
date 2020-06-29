@@ -62,6 +62,7 @@ function getPerson(request, response) {
             var fir = JSON.parse(my_obj);
             var firstName = fir.first;
             var lastName = fir.last;
+            var money = fir.balance;
 
             //person.toString()
             //const first = "SELECT first FROM person WHERE id = $1::int";
@@ -71,7 +72,7 @@ function getPerson(request, response) {
               //app.get('/getPerson', (request, response) => {
               //const weight = +req.body.weight
               //const id = request.body.id
-            const obj = { first: firstName, last: lastName, id: id }
+            const obj = { first: firstName, last: lastName, money: money, id: id }
 
             response.render('pages/getPerson', obj)
               //})
