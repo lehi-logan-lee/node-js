@@ -60,13 +60,7 @@ function getPerson(request, response) {
             const person = result[0];
             const first = "SELECT first FROM person WHERE id = $1::int";
 
-            const fir = pool.query(first, id)
-            pool.then(response => console.log('user:', response.rows[0]))
-            pool.catch(err =>
-                setImmediate(() => {
-                    throw err
-                  })
-                )
+            const fir = pool.query(first, id);
               //app.get('/getPerson', (request, response) => {
               //const weight = +req.body.weight
               //const id = request.body.id
