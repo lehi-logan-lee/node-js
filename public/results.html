@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script>
+        $(() => {
+            let query = window.location.href.slice(window.location.href.indexOf('?') + 1);
+            console.log(query);
+            $.get(`/search?${query}`, res => {
+                console.log(`Search succeeded. ${res.length} results.`);
+                $('#loading').html('');
+                if (res.length != 0) {
+                    res.filter(card => card.imageUrl !== undefined).forEach(card => {
+                        $('#results').append(`<li>
+                            <hr>
+                            <ul>
+                                <li><p><strong>${card.name}</strong> - &#40;${card.setName}&#41;</p></li>
+                                <li><a href="/cards?multiverseid=${card.multiverseid}&name=${card.name}"><img alt="${card.name}" src="${card.imageUrl}"></a></li>
+                            </ul>
+                        </li>`);
+                    });
+                } else {
+                    $('#results').append('<p>No results found</p>');
+                }
+            });
+        });
+    </script>
+    <title>MTG Search & Price</title>
+    <link rel="stylesheet" href="stylesheets/main.css">
+</head>
+<body>
+    <a href="/">Back to Search</a>
+
+    <div id="loading"><p class="loading">Fetching cards</p></div>
+    <ul id="results">
+        <!-- <li>
+             <ul>
+                 <li><p><strong>${card.name}</strong> - &#40;${card.setName}#41;</p></li>
+                 <li><a href="/cards?multiverseid=${card.multiverseid}><img alt="${card.name}" src="${card.imageUrl}"></a></li>
+             </ul>
+         </li> -->
+    </ul>
+</body>
+</html>

@@ -1,40 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <title>Document</title>
-</head>
-<body>
-    <div class="jumbotron d-flex align-center">
-        <div class="container">
-        <div class='row'>
-            <div class='col col-xs-4'>
-                <h2>Postal Rate Calculator</h2>
-                <form action="/postage" method="post">
-                    <div class="form-group">
-                        <label for="width">weight:</label>
-                        <input type="text" class="form-control col-xs-4" id="weight" name='weight' required>
-                    </div>
-                    <div class="form-group">
-                        <label for="type">Type:</label>
-                        <select class="form-control col-xs-4" id="type" name='type'>
-                        <option>Letters (Stamped)</option>
-                        <option>Letters (Metered)</option>
-                        <option>Large Envelopes (Flats)</option>
-                        <option>First-Class Package Service—Retail</option>
-                        </select>
-                    </div> 
-                    
-                    <button type="submit" class="btn btn-success btn-lg">Check Result</button>
-                </form>
-            </div>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <title>MTG Search & Price</title>
+        <link rel="stylesheet" href="stylesheets/main.css">
+    </head>
+    <body>
+        <div id="basic" class="search_div">
+            <a href="/advanced">Advanced Search</a>
+            <br>
+            <form class="search_form" action="/results" method="GET">
+                <div>
+                    <h1>Magic: The Gathering</h1>
+                    <h2>Search & Price</h2>
+                </div>
+                <ul>
+                    <li>
+                        <label class="search_label" for="name">Card Name</label>
+                        <input type="text" name="name">
+                    </li>
+                    <li>
+                        <label class="search_label" for="color">Search by Color</label><br>
+                        <input type="checkbox" name="color" value="white"><label for="white"><img class="mana" alt="white" title="white" src="https://gatherer.wizards.com/images/Redesign/White_Mana.png"></label>
+                        <input type="checkbox" name="color" value="blue"><label for="blue"><img class="mana" alt="blue" title="blue" src="https://gatherer.wizards.com/images/Redesign/Blue_Mana.png"></label>
+                        <input type="checkbox" name="color" value="black"><label for="black"><img class="mana" alt="black" title="black" src="https://gatherer.wizards.com/images/Redesign/Black_Mana.png"></label>
+                        <input type="checkbox" name="color" value="red"><label for="red"><img class="mana" alt="red" title="red" src="https://gatherer.wizards.com/images/Redesign/Red_Mana.png"></label>
+                        <input type="checkbox" name="color" value="green"><label for="green"><img class="mana" alt="green" title="green" src="https://gatherer.wizards.com/images/Redesign/Green_Mana.png"></label>
+                    </li>
+                    <li><input type="submit" value="SEARCH"></li>
+                </ul>
+                <input type="hidden" name="search_type" value="basic">
+            </form>
         </div>
-    </div>
-    </div>
-</body>
+    </body>
 </html>

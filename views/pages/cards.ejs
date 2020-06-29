@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script>
+        $(() => {
+            let query = window.location.href.slice(window.location.href.indexOf('?') + 1);
+            console.log(query);
+            $.get(`/getCard?${query}`, res => {
+                let card = res.card;
+                console.log(`Search succeeded. Displaying data for ${card.name}.`);
+                $('#loading').html('');
+                $('#result').append(`<div id="card_head"><h1>${card.name}</h1>
+                    <h2>${card.setName} &#40;${card.set}&#41;</h2>
+                    <hr>
+                    <img id="card_art" alt="${card.name}" src="${card.imageUrl} "></div>
+                    <table class="oracle">
+                        <tr>
+                            <td class="key">Card Name</td>
+                            <td class="value">${card.name}</td>
+                        </tr>
+                        <tr>
+                            <td class="key">Market Value</td>
+                            <td class="value"><a href="https://shop.tcgplayer.com/magic/${card.setName.replace(/ /g, '-')}/${card.name.replace(/ /g, '-')}">TCGPlayer</a></td>
+                        </tr>
+                        <tr>
+                            <td class="key">Mana Cost</td>
+                            <td class="value">${card.manaCost}</td>
+                        </tr>
+                        <tr>
+                            <td class="key">CMC</td>
+                            <td class="value">${card.cmc}</td>
+                        </tr>
+                        <tr>
+                            <td class="key">Types</td>
+                            <td class="value">${card.type}</td>
+                        </tr>
+                        <tr>
+                            <td class="key">Oracle Text</td>
+                            <td class="value">${card.text}</td>
+                        </tr>
+                        <tr>
+                            <td class="key">P/T</td>
+                            <td class="value">${card.power} / ${card.toughness}</td>
+                        </tr>
+                        <tr>
+                            <td class="key">Rarity</td>
+                            <td class="value">${card.rarity}</td>
+                        </tr>
+                        <tr>
+                            <td class="key">Artist</td>
+                            <td class="value">${card.artist}</td>
+                        </tr>
+                    </table>`);
+            });
+        });
+    </script>
+    <title>MTG Search & Price</title>
+    <link rel="stylesheet" href="stylesheets/main.css">
+</head>
+<body>
+    <button onclick="window.history.back();">Back to Results</button>
+
+    <div id="loading"><p class="loading">Loading '<%- name %>'</p></div>
+    <div class="card_view" id="result"></div>
+</body>
+</html>
