@@ -58,14 +58,14 @@ function getPerson(request, response) {
 			response.status(500).json({success: false, data: error});
 		} else {
             const person = result[0];
-            const first = "SELECT first FROM person WHERE id = $1::int";
+            //const first = "SELECT first FROM person WHERE id = $1::int";
 
-            const fir = pool.query(first, id);
-            var p = Promise.resolve(fir);
+            //const fir = pool.query(first, id);
+            //var p = Promise.resolve(fir);
               //app.get('/getPerson', (request, response) => {
               //const weight = +req.body.weight
               //const id = request.body.id
-            const obj = { first: p, id: id }
+            const obj = { first: person, id: id }
 
             response.render('pages/getPerson', obj)
               //})
