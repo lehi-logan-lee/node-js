@@ -60,10 +60,10 @@ function getPerson(request, response) {
             const person = result[0];
               //app.get('/getPerson', (request, response) => {
               //const weight = +req.body.weight
-              //const id = request.body.id
-              //const obj = { result: person }
+              const id = request.body.id
+              const obj = { id: id, fullName: person }
 
-              response.render('pages/getPerson', person)
+              response.render('pages/getPerson', obj)
               //})
 			//response.status(200).json(person);
 		}
