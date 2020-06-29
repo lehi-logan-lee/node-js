@@ -26,7 +26,7 @@ app.set('port', (process.env.PORT || 5000));
   app.use(bodyParser.urlencoded({ extended: true }))
   app.set('views', path.join(__dirname, 'views'))
   app.set('view engine', 'ejs')
-  //app.get('/', (req, res) => res.render('pages/index'))
+  app.get('/', (req, res) => res.render('pages/index'))
   //app.post('/getPerson', getPerson => {
     //const weight = +req.body.weight
     //const type = req.body.id
@@ -38,7 +38,7 @@ app.set('port', (process.env.PORT || 5000));
 
 // This says that we want the function "getPerson" below to handle
 // any requests that come to the /getPerson endpoint
-app.post('/getPerson', getPerson);
+app.get('/getPerson', getPerson);
 
 // Start the server running
 app.listen(app.get('port'), function() {
