@@ -27,18 +27,18 @@ app.set('port', (process.env.PORT || 5000));
   app.set('views', path.join(__dirname, 'views'))
   app.set('view engine', 'ejs')
   app.get('/', (req, res) => res.render('pages/index'))
-  app.post('/getPerson', getPerson => {
+  //app.post('/getPerson', getPerson => {
     //const weight = +req.body.weight
     //const type = req.body.id
-    const obj = { result: getPerson }
+    //const obj = { result: getPerson }
 
-    res.render('pages/getPerson', obj)
-  })
+   // res.render('pages/getPerson', obj)
+  //})
   //.listen(PORT, () => console.log(`Listening on ${ PORT }`))*/
 
 // This says that we want the function "getPerson" below to handle
 // any requests that come to the /getPerson endpoint
-//app.get('/getPerson', getPerson);
+app.post('/getPerson', getPerson);
 
 // Start the server running
 app.listen(app.get('port'), function() {
