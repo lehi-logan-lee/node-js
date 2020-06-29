@@ -58,7 +58,7 @@ function getPerson(request, response) {
 			response.status(500).json({success: false, data: error});
 		} else {
             const person = result[0];
-            var jsonPerson = status(200).json(person);
+            var jsonPerson = json(person);
             var txt = JSON.parse(jsonPerson);
             var first = txt.first;
               //app.get('/getPerson', (request, response) => {
