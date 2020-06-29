@@ -30,7 +30,7 @@ app.use(express.static(__dirname + '/public'));
   app.post('/getPerson', (req, res) => {
     //const weight = +req.body.weight
     const type = req.body.id
-    const obj = { type: type, result: getPerson(request, response) }
+    const obj = { type: type, result: getPerson(req, res) }
 
     res.render('pages/getPerson', obj)
   })
