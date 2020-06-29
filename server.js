@@ -58,13 +58,13 @@ function getPerson(request, response) {
 			response.status(500).json({success: false, data: error});
 		} else {
             const person = result[0];
-              app.get('/getPerson', (request, response) => {
+              //app.get('/getPerson', (request, response) => {
               //const weight = +req.body.weight
-              const id = request.body.id
-              const obj = { id: id, result: person }
+              //const id = request.body.id
+              const obj = { result: person }
 
               response.render('pages/getPerson', obj)
-              })
+              //})
 			//response.status(200).json(person);
 		}
 	});
