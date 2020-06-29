@@ -27,13 +27,7 @@ app.set('port', (process.env.PORT || 5000));
   app.set('views', path.join(__dirname, 'views'))
   app.set('view engine', 'ejs')
   app.get('/', (req, res) => res.render('pages/index'))
-  //app.post('/getPerson', getPerson => {
-    //const weight = +req.body.weight
-    //const type = req.body.id
-    //const obj = { result: getPerson }
 
-   // res.render('pages/getPerson', obj)
-  //})
   //.listen(PORT, () => console.log(`Listening on ${ PORT }`))*/
 
 // This says that we want the function "getPerson" below to handle
@@ -63,8 +57,15 @@ function getPerson(request, response) {
 		if (error || result == null || result.length != 1) {
 			response.status(500).json({success: false, data: error});
 		} else {
-			const person = result[0];
-			response.status(200).json(person);
+            const person = result[0];
+              app.get('/getPerson', (request, response) => {
+              //const weight = +req.body.weight
+              const id = request.body.id
+              const obj = { id: id, result: person }
+
+              response.render('pages/getPerson', obj)
+              })
+			//response.status(200).json(person);
 		}
 	});
 }
