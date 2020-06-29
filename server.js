@@ -59,13 +59,14 @@ function getPerson(request, response) {
 		} else {
             const person = result[0];
             const first = "SELECT first FROM person WHERE id = $1::int";
-            ;(async () => {
+
             const fir = await pool.query(first, id);
-        })().catch(err =>
-            setImmediate(() => {
-              throw err
-            })
-          )
+            pool.then(res => console.log('user:', res.rows[0]))
+            pool.catch(err =>
+                setImmediate(() => {
+                    throw err
+                  })
+                )
               //app.get('/getPerson', (request, response) => {
               //const weight = +req.body.weight
               //const id = request.body.id
