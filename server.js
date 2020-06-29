@@ -57,10 +57,10 @@ function getPerson(request, response) {
 		if (error || result == null || result.length != 1) {
 			response.status(500).json({success: false, data: error});
 		} else {
-            const person = result[0];
-            const jsonPerson = json(person);
-            const txt = JSON.parse(jsonPerson);
-            const first = txt.first;
+            const keka = result[0];
+            const txt = json(keka);
+            const person = JSON.parse(txt);
+            const first = person.first;
               //app.get('/getPerson', (request, response) => {
               //const weight = +req.body.weight
               //const id = request.body.id
