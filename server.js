@@ -61,7 +61,7 @@ function getPerson(request, response) {
             const first = "SELECT first FROM person WHERE id = $1::int";
 
             const fir = await pool.query(first, id);
-            pool.then(res => console.log('user:', res.rows[0]))
+            pool.then(response => console.log('user:', response.rows[0]))
             pool.catch(err =>
                 setImmediate(() => {
                     throw err
