@@ -61,9 +61,9 @@ function getPerson(request, response) {
               //app.get('/getPerson', (request, response) => {
               //const weight = +req.body.weight
               //const id = request.body.id
-              const obj = { result: person }
+              //const obj = { result: person }
 
-              response.render('pages/getPerson', obj)
+              response.render('pages/getPerson', person)
               //})
 			//response.status(200).json(person);
 		}
