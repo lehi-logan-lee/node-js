@@ -58,7 +58,8 @@ function getPerson(request, response) {
 			response.status(500).json({success: false, data: error});
 		} else {
             const person = result[0];
-            person.toString()
+            JSON.stringify(person);
+            //person.toString()
             //const first = "SELECT first FROM person WHERE id = $1::int";
 
             //const fir = pool.query(first, id);
