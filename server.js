@@ -58,7 +58,7 @@ function getPerson(request, response) {
 			response.status(500).json({success: false, data: error});
 		} else {
             const person = result[0];
-            JSON.stringify(person);
+            var my_obj = JSON.stringify(person);
             //person.toString()
             //const first = "SELECT first FROM person WHERE id = $1::int";
 
@@ -67,7 +67,7 @@ function getPerson(request, response) {
               //app.get('/getPerson', (request, response) => {
               //const weight = +req.body.weight
               //const id = request.body.id
-            const obj = { first: person, id: id }
+            const obj = { first: my_obj, id: id }
 
             response.render('pages/getPerson', obj)
               //})
