@@ -34,6 +34,15 @@ app.set('port', (process.env.PORT || 5000));
 // any requests that come to the /getPerson endpoint
 app.get('/getPerson', getPerson);
 
+// End point for exchange
+app.post('/balance', (req, res) => {
+    const weight = +req.body.weight
+    const type = req.body.type
+    const obj = { weight: weight, type: type, result: calculateRate(weight, type) }
+
+    res.render('pages/postage', obj)
+  })
+
 // Start the server running
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
@@ -115,3 +124,24 @@ function getPersonFromDb(id, callback) {
 	});
 
 } // end of getPersonFromDb
+
+function calculateRate(weight, type) {
+    let baseValue = 0;
+    const rate = 0.15;
+      switch(type) {
+        case 'USD':
+          baseValue = 0.55;
+          break
+        case 'EUR':
+            baseValue = 0.50;
+          break
+        case 'CNY':
+            baseValue = 1.00;
+          break
+        case 'JPY':
+            baseValue = 0.35;
+          break
+      }
+
+      return (baseValue + (Math.ceil(weight) - 1) * 0.15).toFixed(2);
+  }
