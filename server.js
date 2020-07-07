@@ -136,10 +136,10 @@ function calculateRate(weight, type) {
             rate = 0.88;
           break
         case 'CNY':
-            baseValue = 7.00;
+            rate = 7.00;
           break
         case 'JPY':
-            baseValue = 107.36;
+            rate = 107.36;
           break
       }
 
