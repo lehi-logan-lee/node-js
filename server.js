@@ -126,22 +126,22 @@ function getPersonFromDb(id, callback) {
 } // end of getPersonFromDb
 
 function calculateRate(weight, type) {
-    let baseValue = 0;
-    const rate = 0.15;
+    //const baseValue = 0;
+    let rate = 1;
       switch(type) {
         case 'USD':
-          baseValue = 0.55;
+          rate = 1.00;
           break
         case 'EUR':
-            baseValue = 0.50;
+            rate = 0.88;
           break
         case 'CNY':
-            baseValue = 1.00;
+            baseValue = 7.00;
           break
         case 'JPY':
-            baseValue = 0.35;
+            baseValue = 107.36;
           break
       }
 
-      return (baseValue + (Math.ceil(weight) - 1) * 0.15).toFixed(2);
+      return (rate * weight).toFixed(2);
   }
