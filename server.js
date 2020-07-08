@@ -40,7 +40,7 @@ app.post('/balance', (req, res) => {
     const type = req.body.type
     const obj = { weight: weight, type: type, result: calculateRate(weight, type) }
 
-    res.render('pages/postage', obj)
+    res.render('https://fast-thicket-49899.herokuapp.com/exchange.html', obj)
   })
 
 // Start the server running
