@@ -30,11 +30,25 @@
                         </select>
                     </div> 
                     
-                    <button type="submit" class="btn btn-success btn-lg">Exchange</button>
+                    <button type="button" onclick="loadDoc()" class="btn btn-success btn-lg">Exchange</button>
                 </form>
             </div>
         </div>
     </div>
     </div>
+
+    <script>
+        function loadDoc() {
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              document.getElementById("demo").innerHTML =
+              this.responseText;
+            }
+          };
+          xhttp.open("GET", "balance.ejs", true);
+          xhttp.send();
+        }
+        </script>
 </body>
 </html>
