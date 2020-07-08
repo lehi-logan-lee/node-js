@@ -40,7 +40,7 @@ app.post('/balance', (req, res) => {
     const type = req.body.type
     const obj = { weight: weight, type: type, result: calculateRate(weight, type) }
 
-    res.render('pages/balance', obj)
+    res.render('pages/postage', obj)
   })
 
 // Start the server running
