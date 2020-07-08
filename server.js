@@ -41,7 +41,7 @@ app.post('/balance', (req, res) => {
 	const obj = { weight: weight, type: type, result: calculateRate(weight, type) }
 	
 	var fs = require('fs');
-	fs.readFile('./exchange.html', function (error, content) {
+	fs.readFile('exchange.html', function (error, content) {
 	   if (error) {
 		  response.writeHead(500);
 		  response.end('Error');
