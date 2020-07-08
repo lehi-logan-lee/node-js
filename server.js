@@ -38,6 +38,17 @@ app.get('/getPerson', getPerson);
 router.post('/balance',function(req,res){
 	res.sendFile(path.join(__dirname+'/exchange.html'));
   });
+
+app.post(function(req, res, next){
+    next();
+});
+router.get('/ajax', function(req, res){
+    res.render('ajax', {title: 'An Ajax Example', quote: "AJAX is great!"});
+});
+router.post('/ajax', function(req, res){
+    res.render('ajax', {title: 'An Ajax Example', quote: req.body.weight});
+});
+
 // End point for exchange
 app.post('/balance', (req, res) => {
     const weight = +req.body.weight

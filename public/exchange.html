@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="/magic.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -14,8 +16,9 @@
         <div class="container">
         <div class='row'>
             <div class='col col-xs-4'>
+                
                 <h2>Money Exchanger</h2>
-                <form action="/balance" method="post">
+                <form action="/balance" method="post" id="exchange">
                     <div class="form-group">
                         <label for="width">Amount:</label>
                         <input type="text" class="form-control col-xs-4" id="weight" name='weight' required>

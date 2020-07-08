@@ -2,6 +2,8 @@
 <html>
 <head>
   <% include ../partials/header.ejs %>
+  <script src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
+  <script src="/magic.js"></script>
 </head>
 
 <body>
@@ -11,6 +13,7 @@
     <a href="../fortune.html" class="lang-logo">
       <img src="/lang-logo.png">
     </a>
+    <h1>Weight: <%=weight%> </h1>
     <h2>You exchanged <%= weight %> USD to <%= result %> <%= type %></h2>
 
   </div>
