@@ -3,6 +3,7 @@ const app = express();
 //I added it
 var bodyParser = require('body-parser');
 const path = require('path')
+const router = express.Router();
 const PORT = process.env.PORT || 5000
 
 // Following the "Single query" approach from: https://node-postgres.com/features/pooling#single-query
@@ -34,6 +35,9 @@ app.set('port', (process.env.PORT || 5000));
 // any requests that come to the /getPerson endpoint
 app.get('/getPerson', getPerson);
 
+router.post('/balance',function(req,res){
+	res.sendFile(path.join(__dirname+'/exchange.html'));
+  });
 // End point for exchange
 app.post('/balance', (req, res) => {
     const weight = +req.body.weight
@@ -42,6 +46,8 @@ app.post('/balance', (req, res) => {
 	
     res.render('pages/balance', obj)
   })
+
+  app.use('/', router);
 
 // Start the server running
 app.listen(app.get('port'), function() {
