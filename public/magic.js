@@ -1,7 +1,7 @@
 $(document).ready(function(){
-    $("form#exchange").on('submit', function(e){
+    $("form#changeQuote").on('submit', function(e){
         e.preventDefault();
-        var data = $('input[name=weight]').val();
+        var data = $('input[name=quote]').val();
         $.ajax({
             type: 'post',
             url: '/ajax',
@@ -9,7 +9,7 @@ $(document).ready(function(){
             dataType: 'text'
         })
         .done(function(data){
-            $('h1').html(data.weight);
+            $('h1').html(data.quote);
         });
     });
 });
