@@ -38,9 +38,20 @@ app.get('/getPerson', getPerson);
 app.post('/balance', (req, res) => {
     const weight = +req.body.weight
     const type = req.body.type
-    const obj = { weight: weight, type: type, result: calculateRate(weight, type) }
+	const obj = { weight: weight, type: type, result: calculateRate(weight, type) }
+	
+	var fs = require('fs');
+	fs.readFile('./exchange.html', function (error, content) {
+	   if (error) {
+		  response.writeHead(500);
+		  response.end('Error');
+	   } else {
+		  response.writeHead(200, { 'Content-Type': 'text/html' });
+		  response.end(content, 'utf-8');
+	   }
+	});
 
-    res.render('https://fast-thicket-49899.herokuapp.com/exchange.html', obj)
+    res.render('exchange.html', obj)
   })
 
 // Start the server running
