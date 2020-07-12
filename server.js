@@ -48,7 +48,7 @@ router.post('/balance',function(req,res){
   });
    
   app.get("/",function(req,res){
-    res.sendFile(path + "testAjax.html");
+    res.sendFile("testAjax.html");
   });
    
   app.post("/api/customers/save", function(req,res){
