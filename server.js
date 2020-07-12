@@ -6,8 +6,6 @@ const path = require('path')
 const router = express.Router();
 const PORT = process.env.PORT || 5000
 
-var customers = [];
-
 // Following the "Single query" approach from: https://node-postgres.com/features/pooling#single-query
 
 const { Pool } = require("pg"); // This is the postgres database connection module.
@@ -41,37 +39,7 @@ router.post('/balance',function(req,res){
 	res.sendFile(path.join(__dirname+'/exchange.html'));
   });
 
-  //for ajax
-  router.use(function (req,res,next) {
-    console.log("/" + req.method);
-    next();
-  });
-   
-  app.get("/",function(req,res){
-    res.sendFile("testAjax.html");
-  });
-   
-  app.post("/api/customers/save", function(req,res){
-    console.log('Post a Customer: ' + JSON.stringify(req.body));
-    var customer = {};
-    customer.firstname = req.body.firstname;
-    customer.lastname = req.body.lastname;
-    
-    customers.push(customer);
-    
-    return res.send(customer);
-  });
-   
-  app.get("/api/customers/all", function(req,res){
-    console.log("Get All Customers");
-    return res.send(customers);
-  });
-   
-  app.use("/",router);
-   
-  app.use("*",function(req,res){
-    res.sendFile(path + "404.html");
-  });
+  
 
 // End point for exchange
 app.post('/balance', (req, res) => {
