@@ -141,8 +141,6 @@ function getPerson(request, response) {
 	// First get the person's id
 	const id = request.query.id;
 
-	// TODO: We should really check here for a valid id before continuing on...
-
 	// use a helper function to query the DB, and provide a callback for when it's done
 	getPersonFromDb(id, function(error, result) {
 		// This is the callback function that will be called when the DB is done.
@@ -159,16 +157,9 @@ function getPerson(request, response) {
             var lastName = fir.last;
             var money = fir.balance;
 
-            //person.toString()
-            //const first = "SELECT first FROM person WHERE id = $1::int";
-
-            //const fir = pool.query(first, id);
-            //var p = Promise.resolve(fir);
-              //app.get('/getPerson', (request, response) => {
             const obj = { first: firstName, last: lastName, money: money, id: id }
 
             response.render('pages/getPerson', obj)
-			//response.status(200).json(person);
 		}
 	});
 }
