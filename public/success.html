@@ -7,6 +7,18 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+         $("button").click(function(){
+            $.getJSON("server.js", function(result){
+              $.each(result, function(i, field){
+                $("div").append(field + " ");
+              });
+            });
+          });
+        });
+    </script>
     <title>Document</title>
 </head>
 <body>
@@ -20,15 +32,14 @@
                           <img src="cover.png" class="img img-responsive" alt="book" > </img> 
                       </div> 
                       <div class="col-md-9"> 
-                          <h2> An introduction to mean stack </h2> 
-                          <hr> 
-                          <b> Description: </b> Start learning mean stack today with this book that is optimized 
-                          for experiential learning. 
-                          <hr> 
-                          <h2> Only for $$ 1.00 </h2> 
-                          <hr> 
-                          <a href="/buy"> 
-                          <button class="btn btn-warning btn-lg"> Buy now for $1 </button> 
+                          <h2 style="color: #33ff55;"> 
+                              Congratulations ! <hr> 
+                              Successfully completed payment.  
+                               </h2> 
+                               <hr> 
+                          <a href="/"> 
+                          <button class="btn btn-warning btn-lg"> Back to home.  </button> 
+                          </a> 
                           </a> 
                       </div> 
                   </div> 

@@ -1,10 +1,20 @@
-const express = require('express');
-const app = express();
-//I added it
+// import the required packages 
+
+var express = require('express'); 
+var path = require('path'); 
+var app = express();
 var bodyParser = require('body-parser');
-const path = require('path')
 const router = express.Router();
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 3000
+var paypal = require('paypal-rest-sdk');
+
+
+// configure paypal with the credentials you got when you created your paypal app
+paypal.configure({
+  'mode': 'sandbox', //sandbox or live 
+  'client_id': 'AbGpOTAxk-_7QAP9fKYd0Kn3K6jQ0LtoRmk8ToBsePuEFefSrPCrJbdj5-jlmshoIW-xr6zbKvStsR_F', // please provide your client id here 
+  'client_secret': 'EDq2UStlRZwxqLUX_8m0_YLb6p1Gum-M1mUW5VFnOfMpjt8zc18r8tNbua9NExllgE1mCxkztRhMLhCC' // provide your client secret here 
+});
 
 // Following the "Single query" approach from: https://node-postgres.com/features/pooling#single-query
 
@@ -17,19 +27,15 @@ const connectionString = process.env.DATABASE_URL || "postgres://tevopxwhcwduwg:
 // Establish a new connection to the data source specified the connection string.
 const pool = new Pool({connectionString: connectionString});
 
+app.set('port', (process.env.PORT || 3000));
 
-app.set('port', (process.env.PORT || 5000));
-//app.use(express.static(__dirname + '/public'));
-//I added it
-//express()
-  app.use(express.static(path.join(__dirname, 'public')))
-  app.use(bodyParser.json())
-  app.use(bodyParser.urlencoded({ extended: true }))
-  app.set('views', path.join(__dirname, 'views'))
-  app.set('view engine', 'ejs')
-  app.get('/', (req, res) => res.render('pages/index'))
-
-  //.listen(PORT, () => console.log(`Listening on ${ PORT }`))*/
+// set public directory to serve static html files 
+app.use('/', express.static(path.join(__dirname, 'public'))); 
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'ejs')
+app.get('/', (req, res) => res.render('pages/index'))
 
 // This says that we want the function "getPerson" below to handle
 // any requests that come to the /getPerson endpoint
@@ -39,24 +45,95 @@ router.post('/balance',function(req,res){
 	res.sendFile(path.join(__dirname+'/exchange.html'));
   });
 
-  
-
 // End point for exchange
 app.post('/balance', (req, res) => {
-    const weight = +req.body.weight
-    const type = req.body.type
-	const obj = { weight: weight, type: type, result: calculateRate(weight, type) }
+  const weight = +req.body.weight
+  const type = req.body.type
+const obj = { weight: weight, type: type, result: calculateRate(weight, type) }
+
+  res.render('pages/balance', obj)
+})
+
+app.use('/', router);
+
+// redirect to store when user hits http://localhost:3000
+app.get('/' , (req , res) => {
+    res.redirect('/index.html'); 
+})
+
+// start payment process 
+app.get('/buy' , ( req , res ) => {
+	// create payment object 
+    var payment = {
+            "intent": "authorize",
+	"payer": {
+		"payment_method": "paypal"
+	},
+	"redirect_urls": {
+		"return_url": "http://127.0.0.1:3000/success",
+		"cancel_url": "http://127.0.0.1:3000/err"
+	},
+	"transactions": [{
+		"amount": {
+			"total": 1.00,
+			"currency": "USD"
+		},
+		"description": " a book on mean stack "
+	}]
+    }
 	
-    res.render('pages/balance', obj)
-  })
+	
+	// call the create Pay method 
+    createPay( payment ) 
+        .then( ( transaction ) => {
+            var id = transaction.id; 
+            var links = transaction.links;
+            var counter = links.length; 
+            while( counter -- ) {
+                if ( links[counter].method == 'REDIRECT') {
+					// redirect to paypal where user approves the transaction 
+                    return res.redirect( links[counter].href )
+                }
+            }
+        })
+        .catch( ( err ) => { 
+            console.log( err ); 
+            res.redirect('/err');
+        });
+}); 
 
-  app.use('/', router);
 
-// Start the server running
+// success page 
+app.get('/success' , (req ,res ) => {
+    console.log(req.query); 
+    res.redirect('/success.html'); 
+})
+
+// error page 
+app.get('/err' , (req , res) => {
+    console.log(req.query); 
+    res.redirect('/err.html'); 
+})
+
+// Start the server running, app listens on 3000 port 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
 
+
+// helper functions 
+var createPay = ( payment ) => {
+    return new Promise( ( resolve , reject ) => {
+        paypal.payment.create( payment , function( err , payment ) {
+         if ( err ) {
+             reject(err); 
+         }
+        else {
+            resolve(payment); 
+        }
+        }); 
+    });
+}
 
 // This function handles requests to the /getPerson endpoint
 // it expects to have an id on the query string, such as: http://localhost:5000/getPerson?id=1

@@ -20,15 +20,13 @@
                           <img src="cover.png" class="img img-responsive" alt="book" > </img> 
                       </div> 
                       <div class="col-md-9"> 
-                          <h2> An introduction to mean stack </h2> 
+                          <h2 style="color: #dd3322;"> Alas :( <hr> 
+                              An error has occured.
+                           </h2> 
+  
                           <hr> 
-                          <b> Description: </b> Start learning mean stack today with this book that is optimized 
-                          for experiential learning. 
-                          <hr> 
-                          <h2> Only for $$ 1.00 </h2> 
-                          <hr> 
-                          <a href="/buy"> 
-                          <button class="btn btn-warning btn-lg"> Buy now for $1 </button> 
+                          <a href="/"> 
+                          <button class="btn btn-warning btn-lg"> Back to home.  </button> 
                           </a> 
                       </div> 
                   </div> 
@@ -36,6 +34,19 @@
                </div>
         </div> 
         <div class="col-md-2"> 
-        </div>
+        </div> 
+    <script>
+        function loadDoc() {
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              document.getElementById("demo").innerHTML =
+              this.responseText;
+            }
+          };
+          xhttp.open("GET", "server.js", true);
+          xhttp.send();
+        }
+        </script>
 </body>
 </html>
