@@ -115,6 +115,11 @@ app.get('/err' , (req , res) => {
     res.redirect('/err.html'); 
 })
 
+//404 not found
+app.get('*', function(req, res){
+  res.status(404).send('404, page not found.');
+});
+
 // Start the server running, app listens on 3000 port 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
