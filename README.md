@@ -1,3 +1,6 @@
+To see the data from the database, you need to create database in your local environment, or you can test it on this heroku link: https://fast-thicket-49899.herokuapp.com/fortune.html
+To test it locally, install and configure all the environment, go to the file directory and run server.js on CMD if using Windows.
+
 # node-js-getting-started
 
 A barebones Node.js app using [Express 4](http://expressjs.com/).
@@ -15,7 +18,7 @@ $ npm install
 $ npm start
 ```
 
-Your app should now be running on [localhost:5000](http://localhost:5000/).
+Your app should now be running on [localhost:3000](http://localhost:3000/).
 
 ## Deploying to Heroku
 
